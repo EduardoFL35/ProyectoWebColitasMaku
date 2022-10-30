@@ -1,0 +1,12 @@
+.placeholder{
+    text-align:left;
+}
+.boton{
+    font-size:14px;
+    font-weight:bold;
+    color:white;
+    background:#000000;
+    border:0px;
+    width:175px;
+    height:32px;
+}
