@@ -1,0 +1,41 @@
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Colitas Maku | Administrador | Articulos</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h2>Informacion de Articulos</h2>
+        <a th:href="@{/admin/articulo/nuevo}">Nuevo Articulo</a>
+
+        <div th:if="${articulos !=null and !articulos.empty}">
+            <table border="1">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Activo</th>
+                    <th>Categoria</th>
+                    <th>Eliminar</th>
+                    <th>Modificar</th>
+
+                </tr>
+                <tr th:each="articulo : ${articulos}">
+                    <td>[[${articulo.nombre}]]</td>
+                    <td>[[${articulo.descripcion}]]</td>
+                    <td>[[${articulo.precio}]]</td>
+                    <td>[[${articulo.cantidad}]]</td>
+                    <td>[[${articulo.activo}]]</td>
+                    <td>[[${articulo.categoria}]]</td>
+                    <td><a th:href="@{/admin/articulo/eliminar/}+${articulo.idCliente}">Eliminar</td>
+                    <td><a th:href="@{/admin/articulo/modificar/}+${articulo.idCliente}">Modificar</td>
+
+                </tr>
+            </table>
+        </div>
+        <div th:if="${articulos ==null or articulos.empty}">
+            <h2>No hay articulos que mostrar</h2>
+    </body>
+</html>

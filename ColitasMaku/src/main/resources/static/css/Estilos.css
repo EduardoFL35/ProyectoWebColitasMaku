@@ -10,3 +10,59 @@
     width:175px;
     height:32px;
 }
+.NovidadesSection {
+
+}
+
+.mainDestacados {
+
+}
+
+.containerProdutos {
+
+}
+
+.produto {
+
+}
+
+.produto__icon {
+
+}
+
+.produto__img {
+  
+     width: 30%;
+  height: 350px;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover .img-content-hover {
+    display: block;
+/*  width: var(--w);
+  margin:1em auto;
+  border: 1px solid #555;
+  position: relative;
+   display: flex;
+  flex-flow: wrap;
+  justify-content: center;*/
+
+}
+
+.productDescription {
+
+}
+
+.produto__title {
+    text-align: center
+    
+
+}
+
+.fas {
+
+}
+
+.fa-cart-plus {
+
+}
+}

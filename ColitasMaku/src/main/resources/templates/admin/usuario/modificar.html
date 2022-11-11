@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Colitas Maku</title>
+        <meta charset="UTF-8">
+            <link href="css/menu.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+
+        <div class="contenido">
+            <h2>Información de Usuario</h2>
+            <a th:href="@{/}">Regresar</a>
+            <hr/>
+            <form th:action="@{/admin/usuario/guardar}"
+                  method="post"
+                  th:object="${usuario}">
+                <input type="hidden" name="idUsuario" th:field="*{idUsuario}"/> <!-- Esto es para que no se dupliquen las cosas, se sobre escriban en el creado antes-->
+
+                <fieldset>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" th:field="*{nombre}"/>
+                </fieldset>
+                <fieldset>
+                    <label for="usuario">Usuario</label>
+                    <input type="text" name="usuario" th:field="*{usuario}"/>
+                </fieldset>
+                <fieldset>
+                    <label for="contrasena">Contrasena</label>
+                    <input type="password" name="contrasena" th:field="*{contrasena}"/>
+                </fieldset>
+                <fieldset>
+                    <label for="correo">Correo</label>
+                    <input type="email" name="correo" th:field="*{correo}"/>
+                </fieldset>
+
+                <fieldset>
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" name="telefono" th:field="*{telefono}"/>
+                </fieldset>
+
+                <hr/>
+                <input type="submit" value="Guardar" name="guardar"/>
+            </form>
+        </div>
+
+    </body>
+</html>
