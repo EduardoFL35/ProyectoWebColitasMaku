@@ -44,8 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "categoria/listado",
                         "cliente/listado")
                 .hasAnyRole("ADMIN")
-                .antMatchers("/")
-                .hasAnyRole("ADMIN","USER")
+                .antMatchers("/","/carrito/**")
+                .permitAll()
+                .antMatchers("facturar/carrito")
+                .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")

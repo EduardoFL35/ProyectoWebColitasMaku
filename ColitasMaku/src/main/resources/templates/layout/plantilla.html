@@ -22,7 +22,7 @@
                         <span class="nav-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav" sec:authorize="hasRole('ROLE_VENDEDOR')">
+                        <ul class="navbar-nav" sec:authorize="hasRole('ROLE_VENDEDOR') isAuthenticated()" >
                             <li class='nav-item px-2'>
                                 <a th:href="@{/}"
                                    class="nav-menu-link nav-link"
@@ -65,6 +65,16 @@
                                     <a href="#" onclick="this.parentNode.submit();"
                                        class="nav-link">
                                         <i class="fa-solid fa-right-from-bracket"></i>[[#{plantilla.logout}]]
+                                    </a>
+                                </form>
+                            </li>
+                        </ul>
+                        <ul class="navbar navbar-nav" sec:authorize="!isAuthenticated()">
+                            <li class="nav-item mr-3">
+                                <form method="POST" th:action="@{/login}">
+                                    <a href="#" onclick="this.parentNode.submit();"
+                                       class="nav-link">
+                                        <i class="fa-solid fa-right-from-bracket"></i>[[#{login.login}]]
                                     </a>
                                 </form>
                             </li>
