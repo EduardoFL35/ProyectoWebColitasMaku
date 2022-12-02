@@ -18,38 +18,41 @@
         </section>
         <section>
 
-            
+
             <div class="container">
-            <h2>[[#{index.titulo}]]</h2>            
-            <div class="row row-cols-3 mb-2" th:if="${articulos !=null and !articulos.empty}">
-                <div class="card" th:each="articulo : ${articulos}">
-                    <div class="card-body">
-                        <h5 class="card-title">[[${articulo.descripcion}]]</h5>
-                        <h6 class="card-subtitle mb-2 text-muted text-end">
-                            [[${#numbers.formatDecimal(articulo.precio,3,2)}]]</h6>
-                        <a class="card-link" th:href="@{/carrito/agregar/} + ${articulo.idArticulo}">[[#{accion.agregar}]]</a>
-                        <p class="card-text">[[${articulo.detalle}]]</p>
+                <h2>[[#{index.titulo}]]</h2>            
+                <div class="row row-cols-3 mb-2" th:if="${articulos !=null and !articulos.empty}">
+                    <div class="card" th:each="articulo : ${articulos}">
+                        <div class="card-body">
+                            <h5 class="card-title">[[${articulo.descripcion}]]</h5>
+                            <img th:src="@{${articulo.url}}" class="card-img-top" width="130" height="200">
+                                <h6 class="card-subtitle mb-2 text-muted text-end">
+                                    [[${#numbers.formatDecimal(articulo.precio,3,2)}]]</h6>
+                                <p class="card-text">[[${articulo.descripcion}]]</p>
+                                <a class="card-link" th:href="@{/carrito/agregar/} + ${articulo.idArticulo}">[[#{accion.agregar}]]</a>
+                                
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            
 
-            <h3 style= "text-align: center;" >Categorías</h3>
-            <figure>
-                <img src="Imagen de WhatsApp 2022-11-08 a las 20.16.26.jpg" alt="a" width="250"/>
-                <figcaption>Repostería<br>Dulce</br></figcaption>
-            </figure>
 
-            <figure>
-                <img class="rounded float-left" src="Imagen de WhatsApp 2022-11-08 a las 20.16.26.jpg" alt="b" width="250"/>
-                <figcaption>Repostería<br>Salada</br></figcaption>
-            </figure>
 
-            <figure>
-                <img src="Imagen de WhatsApp 2022-11-08 a las 20.16.26.jpg" alt="c" width="250"/>
-                <figcaption>Repostería<br>Halloween-Temporada</br></figcaption>
-            </figure>
+                <h3 style= "text-align: center;" >Categorías</h3>
+                <figure>
+                    
+                    <img src="/img/queque.jpg" alt="a" width="250"/>
+                    <figcaption>Repostería<br>Dulce</br></figcaption>
+                </figure>
+
+                <figure>
+                    <img class="rounded float-left" src="/img/salado.jpg" alt="b" width="250"/>
+                    <figcaption>Repostería<br>Salada</br></figcaption>
+                </figure>
+
+                <figure>
+                    <img src="Imagen de WhatsApp 2022-11-08 a las 20.16.26.jpg" alt="c" width="250"/>
+                    <figcaption>Repostería<br>Halloween-Temporada</br></figcaption>
+                </figure>
         </section>
         <p style="text-align: center">
             "Mi meta en la vida es ser tan<br>maravilloso como mi perro cree que</br>soy"

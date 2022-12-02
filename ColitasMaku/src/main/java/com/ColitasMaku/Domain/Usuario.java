@@ -23,7 +23,6 @@ public class Usuario implements Serializable{
     @Column(name="id_usuario")
     private long idUsuario;
     String nombre;
-    String apellidos;
     String correo;
     String telefono;
 
@@ -31,9 +30,8 @@ public class Usuario implements Serializable{
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellidos, String correo, String telefono) {
+    public Usuario(String nombre, String correo, String telefono) {
         this.nombre = nombre;
-        this.apellidos = apellidos;
         this.correo = correo;
         this.telefono = telefono;
     }

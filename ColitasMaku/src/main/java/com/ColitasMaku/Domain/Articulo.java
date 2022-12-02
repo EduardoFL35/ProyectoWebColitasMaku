@@ -28,18 +28,20 @@ public class Articulo implements Serializable{
     int precio;
     int cantidad;
     boolean activo;
+    String url;
     
 
     public Articulo() {
     }
 
-    public Articulo(String nombre, String descripcion, int precio, int cantidad, boolean activo, long idCategoria) {
+    public Articulo(String nombre, String descripcion, int precio, int cantidad, boolean activo, long idCategoria,String url) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.cantidad = cantidad;
         this.activo = activo;     
         this.idCategoria= idCategoria;
+        this.url=url;
     }
 
     
