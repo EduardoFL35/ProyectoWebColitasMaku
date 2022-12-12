@@ -21,35 +21,22 @@
 
             <section th:replace="carrito/fragmentosCarrito :: listadoArticulos"/>
 
+            <section th:replace="categoria/fragmentosCategoria :: listadoCategorias"/>
 
-
-            <h3 style= "text-align: center;" >Categorías</h3>
-            <figure>
-
-                <img src="/img/queque.jpg" alt="a" width="250"/>
-                <figcaption>Repostería<br>Dulce</br></figcaption>
-            </figure>
-
-            <figure>
-                <img class="rounded float-left" src="/img/salado.jpg" alt="b" width="250"/>
-                <figcaption>Repostería<br>Salada</br></figcaption>
-            </figure>
-
-            <figure>
-                <img src="Imagen de WhatsApp 2022-11-08 a las 20.16.26.jpg" alt="c" width="250"/>
-                <figcaption>Repostería<br>Halloween-Temporada</br></figcaption>
-            </figure>
+           
         </section>
         <p style="text-align: center">
             "Mi meta en la vida es ser tan<br>maravilloso como mi perro cree que</br>soy"
         </p>
 
         <script>
-            function addCard(formulario){
-                var valor=formulario.elements[0].value;
-                var url='/carrito/agregar';
-                url=url+'/'+valor;
+            function addCard(formulario) {
+                var valor = formulario.elements[0].value;
+                var url = '/carrito/agregar';
+                url = url + '/' + valor;
                 $("#resultsBlock").load(url);
+
+                console.log(formulario);
             }
         </script>
     </body>

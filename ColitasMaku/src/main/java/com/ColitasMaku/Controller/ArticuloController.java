@@ -8,6 +8,7 @@ import com.ColitasMaku.Domain.Articulo;
 import com.ColitasMaku.Service.ArticuloService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,6 +53,14 @@ public class ArticuloController {
     @GetMapping("/articulo/eliminar/{idArticulo}")
     public String articuloEliminar(Articulo articulo) {
         articuloService.delete(articulo);
+        return "redirect:/articulo/listaArticulos";
+    }
+    
+        @GetMapping("/articulo/busqueda/{idCategoria}")
+    public String buscarCategoria(Model model, Articulo articulo) {
+
+        var articulos = articuloService.buscarPorIdCategoria(articulo.getIdCategoria());
+        model.addAttribute("articulos", articulos);
         return "redirect:/articulo/listaArticulos";
     }
 }

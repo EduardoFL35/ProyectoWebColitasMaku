@@ -32,6 +32,7 @@ public class CarritoController {
     @GetMapping("/carrito/listado")
     public String inicio(Model model) {
         var items = itemService.getItems();
+        System.out.println(items);
         model.addAttribute("items", items);
         var carritoTotalVenta = 0;
         for (Item c : items) {

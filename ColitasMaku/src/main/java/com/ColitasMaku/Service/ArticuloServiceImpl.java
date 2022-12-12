@@ -10,21 +10,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ArticuloServiceImpl implements ArticuloService {
-        
+
     @Autowired
     private ArticuloDao articuloDao;
-    
 
     @Override
     @Transactional
     public List<Articulo> getArticulos(boolean activos) {
-        var lista=(List<Articulo>)articuloDao.findAll();
+        var lista = (List<Articulo>) articuloDao.findAll();
         if (activos) {
             lista.removeIf(e -> !e.isActivo());//e=todos los elementos de la lista ->=remover
         }
         return lista;
     }
-    
+
     @Override
     @Transactional
     public Articulo getArticulo(Articulo articulo) {
@@ -41,5 +40,11 @@ public class ArticuloServiceImpl implements ArticuloService {
     @Transactional
     public void delete(Articulo articulo) {
         articuloDao.delete(articulo);
+    }
+
+    @Override
+    @Transactional
+    public List<Articulo> buscarPorIdCategoria(Long categoria) {
+        return (List<Articulo>) articuloDao.findByIdCategoria(categoria);
     }
 }
