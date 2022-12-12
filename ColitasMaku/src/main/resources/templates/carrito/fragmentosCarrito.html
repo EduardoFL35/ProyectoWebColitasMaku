@@ -20,9 +20,10 @@
                         <div class="card-body">
                             <h5 class="card-title">[[${articulo.descripcion}]]</h5>
                             <figure>
-                                <img th:src="@{${articulo.url}}" class="card-img-top" width="120">  
+                                <img th:src="@{${articulo.url}}" class="card-img-top" width="80">  
                                     <figcaption>
                                         [[${#numbers.formatDecimal(articulo.precio,3,2)}]]
+                                        
                                     </figcaption>
                             </figure>
                             <form>
@@ -80,7 +81,7 @@
                                             <td>[[${item.descripcion}]]</td>
                                             <td class="text-end">[[${new java.text.DecimalFormat('#,##0.00').format(item.precio)}]]</td>
                                             <td class="text-center">[[${new java.text.DecimalFormat('#,##0.00').format(item.cantidad)}]]</td>
-                                            <td class="text-center">[[${new java.text.DecimalFormat('#,##0.00').format(item.precio*item.precio)}]]</td>
+                                            <td class="text-center">[[${new java.text.DecimalFormat('#,##0.00').format(item.precio*item.cantidad)}]]</td>
                                             <td>
                                                 <a th:href="@{/carrito/eliminar/}+${item.idArticulo}"
                                                    class="btn btn-danger">
@@ -98,7 +99,7 @@
                                 </table>
                             </div>
                             <div class="text-center p-2" th:if="${items == null or items.empty}">
-                                <span th:text="#{cliente.no_mostrar}">Lista vacía</span>
+                                <span th:text="#{articulo.no_mostrar}">Lista vacía</span>
                             </div>
                         </div>
                     </div>
@@ -120,7 +121,8 @@
                         </div>
                         <div class="card text-center bg-info text-white mb-3">
                             <div class="card-body">
-                                <a th:href="@{/facturar/carrito}" class="btn btn-info">
+                                <a th:href="@{/facturar/carrito}" onclick="window.print()" class="btn btn-info">
+                                    
                                     <i class="fas fa-forward"></i> [[#{carrito.facturar}]]
                                 </a>
                             </div>
@@ -130,43 +132,7 @@
             </div>
         </section>
 
-        <section th:fragment="agregarUsuario">
-            <div id="agregarUsuario" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title" th:text="#{accion.agregar}">Agregar Usuario</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
-                        <form th:action="@{/usuario/guardar}" th:object="${usuario}"
-                              method="POST" class="was-validated">
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="nombre" th:text="#{cliente.nombre}">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" required="true">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="email" th:text="#{cliente.correo}">Correo</label>
-                                    <input type="email" class="form-control" name="correo" required="true">
-                                </div>
-                                <div class="form-group">
-                                    <label for="telefono" th:text="#{cliente.telefono}">Teléfono</label>
-                                    <input type="tel" class="form-control" name="telefono">
-                                </div>
-                                <div class="form-group">
-                                    <label for="limite" th:text="#{cliente.limite}">Límite</label>
-                                    <input type="number" class="form-control" name="credito.limite" required="true" step="any">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit" th:text="#{accion.guardar}">Guardar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
 
 
         <section th:fragment="editarCarrito">            
@@ -184,7 +150,7 @@
                         <div class="card-body">
                             <h5 class="card-title">[[${item.descripcion}]]</h5>
                             <h6 class="card-subtitle mb-2 text-muted text-end">
-                                [[${new java.text.DecimalFormat('#,##0.00').format(item.precio)}]]+' ('+item.cantidad+')'}]]
+                                [[${new java.text.DecimalFormat('#,##0.00').format(item.precio)+' ('+item.cantidad+')'}]]
                             </h6>
                             <p class="card-text">[[${item.descripcion}]]</p>
                         </div>
@@ -198,7 +164,7 @@
                                 <input type="hidden" name="idArticulo" th:field="*{idArticulo}"/>
                                 <div class="form-group">
                                     <label for="cantidad">[[#{carrito.cantidad}]]:</label>
-                                    <input type="number" name="cantidad" th:field="*{cantidad}" min="1" th:max="${item.cantidad}"/>
+                                    <input type="number" name="cantidad" th:field="*{cantidad}" min="1" /> [[${item.cantidad}]]
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-success" type="submit" name="guardar">
