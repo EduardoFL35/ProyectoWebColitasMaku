@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="layout/plantilla :: head">
+        <title>Colitas Makú</title>       
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <div class="container-fluid-padding">
+            <div class="row welcome text-start m-3">
+                <div class="col-12">
+                    <h1 class="col-12">[[#{index.descripcion1}]]<br>[[#{index.descripcion2}]]</h1>
+                </div>
+                <hr>
+                    <div class="col-12">
+                        <p class="lead">[[#{index.descripcion3}]]</p>
+                    </div>
+            </div>
+        </div>
+        <h3 style= "text-align: center;" class="m-4">[[#{index.categorias}]]</h3>
+
+        <div class="container">
+            <div class="row g-3"><!--Espacio entre articulos responsive-->
+                <div class="col-12 col-md-6 col-lg-4"><!--Cuando se haga pequeña la pestaña se vean para abajo(tamaño de columnas y el largo)-->
+                    <div class="card">
+                        <img src="/img/queque.jpg" alt="Reposteria Dulce" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">[[#{index.repo1}]]</h5>
+                                <p class="card-text">Disfrute de los deliciosos alimentos dulces para su mascota</p>
+                                <a href="/articulo/listaArticulos" class="btn btn-dark">[[#{index.articulos}]]</a>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="/img/salado.jpg" alt="Reposteria Salada" class="card-img-top"/>
+                        <div class="card-body">
+                            <h5 class="card-title">[[#{index.repo2}]]</h5>
+                            <p class="card-text">Repostería canina y felina 100% saludable para los peluditos</p>
+                            <a href="/articulo/listaArticulos" class="btn btn-dark">[[#{index.articulos}]]</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="img/Halloween.jpg" alt="Reposteria Halloween-Temporada" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">[[#{index.repo3}]]</h5>
+                                <p class="card-text">Aún puede hacer tus pedidos para los peluditos, no te quedes sin celebrar Halloween</p>
+                                <a href="/articulo/listaArticulos" class="btn btn-dark">[[#{index.articulos}]]</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="layout/plantilla :: footer"/>
+    </body>
+</html>

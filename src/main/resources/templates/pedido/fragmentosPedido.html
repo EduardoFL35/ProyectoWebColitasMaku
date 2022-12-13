@@ -1,0 +1,193 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+        <title>Colitas Makú</title>
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+
+
+
+        <section th:fragment="listadoPedido" id="pedidos">
+            <div class="container py-4">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card border-dark">
+                            <div class="bg-warning border-dark card-header">
+                                <h4>[[#{pedido.titulo}]]</h4>
+                            </div>
+                            <div th:if="${pedidos != null and !pedidos.empty}">
+                                <table class="table table-stryped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th th:text="#{pedido.nombreCliente}">Nombre</th>
+                                            <th th:text="#{pedido.apellidos}">Apellidos</th>
+                                            <th th:text="#{pedido.articulo}">Articulo</th>
+                                            <th th:text="#{pedido.total}">Total</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="pedido, contador : ${pedidos}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${pedido.nombreCliente}]]</td>
+                                            <td>[[${pedido.apellidos}]]</td>
+                                            <td>[[${pedido.articulo}]]</td>
+                                            <td>[[${pedido.total}]]</td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/pedido/eliminar/}+${pedido.idPedido}"
+                                                   class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/pedido/modificar/}+${pedido.idPedido}"
+                                                   class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${pedidos == null or pedidos.empty}">
+                                <span th:text="#{pedido.no_mostrar}">Lista vacía</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-Secondary mb-3">
+                            <div class="card-body">
+                                <button 
+                                    type="button" 
+                                    class="btn text-white" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#agregarPedido">
+                                    <i class="fas fa-plus"></i> [[#{accion.agregar}]]
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card text-center bg-warning text-dark mb-3">
+                            <div class="card-body border-dark bg-warning">
+                                <h3 th:text="#{pedido.totalPedidos}">Total Pedidos</h3>
+                                <h4 class="display-6">
+                                    <i class="fas fa-users"></i> [[${totalPedidos}]]
+                                </h4>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </section>
+
+        <section th:fragment="agregarPedido">
+            <div id="agregarPedido" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="border-dark modal-header bg-dark text-white">
+                            <h5 class="modal-title" th:text="#{accion.agregar}">Agregar Pedido</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/pedido/guardar}" th:object="${pedido}"
+                              method="POST" class="was-validated">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="nombreCliente" th:text="#{pedido.nombreCliente}">Nombre</label>
+                                    <input type="text" class="form-control" name="nombreCliente" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellidos" th:text="#{pedido.apellidos}">Apellidos</label>
+                                    <input type="text" class="form-control" name="apellidos" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" th:text="#{pedido.correo}">Correo</label>
+                                    <input type="email" class="form-control" name="correo" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefono" th:text="#{pedido.telefono}">Teléfono</label>
+                                    <input type="tel" class="form-control" name="telefono">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit" th:text="#{accion.guardar}">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section th:fragment="editarPedido">            
+            <form method="POST"
+                  th:action="@{/pedido/guardar}"
+                  th:object="${pedido}"
+                  class="was-validated">
+                <input type="hidden" name="idPedido" th:field="*{idPedido}"/>
+                <section th:replace="pedido/fragmentosPedido :: botonesEditar"/> 
+                <div id="details">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card border-dark">
+                                    <div class="card-header bg-warning border-dark">
+                                        <h4>[[#{accion.actualizar}]]</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="nombreCliente" th:text="#{pedido.nombreCliente}">Nombre: </label>
+                                            <input type="text" class="form-control" name="nombreCliente" th:field="*{nombreCliente}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="apellidos" th:text="#{pedido.apellidos}">Apellidos: </label>
+                                            <input type="text"  class="form-control" name="apellidos" th:field="*{apellidos}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="articulo" th:text="#{pedido.articulo}">Artículo: </label>
+                                            <input type="text"  class="form-control" name="articulo" th:field="*{articulo}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="total" th:text="#{pedido.total}">Total: </label>
+                                            <input type="text"  class="form-control" name="total" th:field="*{total}"/>
+                                        </div>                 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+
+        <section th:fragment="botonesEditar">
+            <div id="actions" class="py-4 mb-4 bg-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a th:href="@{/pedido/listado}" class="btn btn-ligth btn-block">
+                                <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-success btn-block">
+                                <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <a th:href="@{/pedido/eliminar/}+${pedido.idPedido}"
+                               class="btn btn-danger btn-block">
+                                <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>
