@@ -1,0 +1,43 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="layout/plantilla :: head">
+        <title>Colitas Makú</title>       
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <section id="main-header" class="py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>La mejor repostería<br>para tu mascota</br></h1>
+                        <p>100% Artesanal</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+
+
+            <section th:replace="carrito/fragmentosCarrito :: listadoArticulos"/>
+
+            <section th:replace="categoria/fragmentosCategoria :: listadoCategorias"/>
+
+           
+        </section>
+        <p style="text-align: center">
+            "Mi meta en la vida es ser tan<br>maravilloso como mi perro cree que</br>soy"
+        </p>
+
+        <script>
+            function addCard(formulario) {
+                var valor = formulario.elements[0].value;
+                var url = '/carrito/agregar';
+                url = url + '/' + valor;
+                $("#resultsBlock").load(url);
+
+                console.log(formulario);
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Registro</title>
+        <meta charset="UTF-8">
+        <link href="css/Estilos.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+
+        <section>
+            <header><h1 style="position: fixed; left: 700px">Únete a la gran familia!</h1></header>
+            <article>
+                <form action="confirmacion.jsp" method="post">
+                    <label style="position: fixed; left: 700px; top: 100px">Nombre</label>
+                    <input style="position: fixed; left: 700px; top: 125px" type="text" name="idUsuario" placeholder="Nombre">
+                    <input style="position: fixed; left: 864px; top: 125px" type="text" name="apellidos" placeholder="Apellidos">
+
+                    <label style="position: fixed; left: 700px; top: 165px">Email</label>
+                    <input style="position: fixed; left: 700px; top: 190px; padding: 0 82px 0" type="email" name="email" placeholder="Email">
+
+                    <label style="position: fixed; left: 700px; top: 230px">Contraseña</label>
+                    <input style="position: fixed; left: 700px; top: 255px; padding: 0 82px 0" type="password" name="registroPassword" placeholder="*******">
+
+                    <label style="position: fixed; left: 700px; top: 295px">Teléfono</label>
+                    <select  style="position: fixed; left: 700px; top: 320px; padding: 4px 0 0" name="codigosDePais" id="codPais">
+                        <option>Costa Rica(+506)</option>
+                        <option>Estados Unidos(+1)</option>
+                        <option>Panamá(+507)</option>
+                        <option>Nicaragua(+505)</option>
+                        <option>España(+34)</option>
+                    </select>
+                    <input style="position: fixed; left: 845px; top: 320px; padding: 2.5px 10px 0" type="number" name="telefono" placeholder="8888-8888">
+                    <p style="position: fixed; left: 700px; top: 385px">¿Ya tienes una cuenta? <a href="iniciarSesion.html">Inicia Sesion</a></p>
+                    <input class="boton" style="position: fixed; left: 950px; top: 390px" type="submit" name="btnRegistro" value="Registrarse">
+                </form>
+            </article>
+        </section>
+
+    </body>
+</html>

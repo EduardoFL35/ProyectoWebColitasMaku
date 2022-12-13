@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="layout/plantilla :: head">
+        <title>TechShop</title>
+    </head>
+    <body>
+
+        <section>F
+            <h1>Bienvenido de vuelta!</h1>
+            <article>
+
+
+                <form action="confirmacion.jsp" method="post">
+                    <label>Email</label><br>
+                    <input type="email" name="email"><br>
+
+                    <label>Contraseña</label><br>
+                    <input type="password" name="loginPassword">
+                </form>
+            </article>
+        </section>
+            <p>¿No tienes una cuenta?<a href="registrarse.html">Registrate</a></p>
+</body>
+</html>

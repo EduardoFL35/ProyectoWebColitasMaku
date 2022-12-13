@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Colitas Maku</title>
+        <meta charset="UTF-8">
+            <link href="css/menu.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        
+        <div class="contenido">
+            <h2>Información de Articulo</h2>
+            <a th:href="@{/}">Regresar</a>
+            <hr/>
+            <form th:action="@{/admin/articulo/guardar}"
+                  method="post"
+                  th:object="${articulo}">
+                <input type="hidden" name="idArticulo" th:field="*{idArticulo}"/> <!-- Esto es para que no se dupliquen las cosas, se sobre escriban en el creado antes-->
+                 
+                <fieldset>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" th:field="*{nombre}"/>
+                </fieldset>
+
+                <fieldset>
+                    <label for="descripcion">Descripcion</label>
+                    <input type="text" name="descripcion" th:field="*{descripcion}"/>
+                </fieldset>
+
+                <fieldset>
+                    <label for="precio">Precio</label>
+                    <input type="text" name="precio" th:field="*{precio}"/>
+                </fieldset>
+
+                <fieldset>
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" name="cantidad" th:field="*{cantidad}"/>
+                </fieldset>
+
+                <fieldset>
+                    <label for="activo">Activo</label>
+                    <input type="checkbox" name="activo" th:field="*{activo}"/>
+                </fieldset>
+                
+                <fieldset>
+                    <label for="categoria">Categoria</label>
+                    <input type="text" name="categoria" th:field="*{idCategoria}"/>
+                </fieldset>
+                <hr/>
+                <input type="submit" value="Guardar" name="guardar"/>
+            </form>
+        </div>
+        
+    </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"      
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Colitas Maku</title>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    </head>
+    <body>
+        <header th:fragment="header" class="header">
+            <nav class="navbar navbar-expand-sm bg-light text-dark p-2">
+                <div class="container">
+                    <a th:href="@{/}" class="navbar-brand">Colitas Makú</a>
+                    <button class="navbar-toggler" 
+                            data-tiggle="collapse"
+                            data-target="#navbarCollapse">
+                        <span class="nav-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav" sec:authorize="hasRole('ROLE_VENDEDOR') isAuthenticated()" >
+                            <li class='nav-item px-2'>
+                                <a th:href="@{/}"
+                                   class="nav-menu-link nav-link"
+                                   th:text="#{plantilla.home}">
+                                    Home</a>
+                            </li>
+
+                            <li class='nav-item px-2'>
+                                <a href="/articulo/listaArticulos"
+                                   class="nav-menu-link nav-link"
+                                   th:text="#{plantilla.catalogo}">
+                                    Catálogo</a>
+                            </li>
+
+                            <li class='nav-item px-2' sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{/categoria/listado}"
+                                   class="nav-menu-link nav-link"
+                                   th:text="#{plantilla.pedidos}">
+                                    Pedidos</a>
+                            </li>
+
+                            <li class='nav-item px-2' sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{/usuario/listado}"
+                                   class="nav-menu-link nav-link"
+                                   th:text="#{plantilla.clientes}">
+                                    Registro de Clientes</a>
+                            </li>
+
+                            <li class='nav-item px-2' sec:authorize="hasRole('ROLE_USER')">
+                                <a th:href="@{/carrito/listado}"
+                                   class="nav-menu-link nav-link"
+                                   th:text="#{plantilla.carrito}">
+                                    Carrito</a>
+                            </li>
+
+                        </ul>
+                        <ul class="navbar navbar-nav" sec:authorize="isAuthenticated()">
+                            <li class="nav-item mr-3">
+                                <form method="POST" th:action="@{/logout}">
+                                    <a href="#" onclick="this.parentNode.submit();"
+                                       class="nav-link">
+                                        <i class="fa-solid fa-right-from-bracket"></i>[[#{plantilla.logout}]]
+                                    </a>
+                                </form>
+                            </li>
+                        </ul>
+                        <ul class="navbar navbar-nav" sec:authorize="!isAuthenticated()">
+                            <li class="nav-item mr-3">
+                                <form method="POST" th:action="@{/login}">
+                                    <a href="#" onclick="this.parentNode.submit();"
+                                       class="nav-link">
+                                        <i class="fa-solid fa-right-from-bracket"></i>[[#{login.login}]]
+                                    </a>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+        <footer th:fragment="footer" class="bg-info text-white mt-5 p-2">
+            <div class="container">
+                <div class="col">
+                    <p class="lead text-center">&COPY; [[#{plantilla.derechos}]] | 
+                        <a th:href="@{/(lang=es)}">ES</a> | 
+                        <a th:href="@{/(lang=en)}">EN</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

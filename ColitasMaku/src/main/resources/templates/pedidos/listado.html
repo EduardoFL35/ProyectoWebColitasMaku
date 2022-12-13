@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head>
+        <title>Colitas Maku | Administrador | Usuarios</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <h2>Informacion de Usuarios</h2>
+        <a th:href="@{/admin/usuario/nuevo}">Nuevo Usuario</a>
+
+        <div th:if="${usuarios !=null and !usuarios.empty}">
+            <table border="1">
+                <tr>
+                    <th>Nombre</th>                    
+                    <th>Correo</th>   
+                    <th>Telefono</th> 
+                    <th>Eliminar</th>
+                    <th>Modificar</th>
+
+                </tr>
+                <tr th:each="usuario : ${usuarios}">
+                    <td>[[${usuario.nombre}]]</td>                    
+                    <td>[[${usuario.correo}]]</td>       
+                    <td>[[${usuario.telefono}]]</td> 
+                    <td><a th:href="@{/admin/usuario/eliminar/}+${usuario.idUsuario}">Eliminar</td>
+                    <td><a th:href="@{/admin/usuario/modificar/}+${usuario.idUsuario}">Modificar</td>
+
+                </tr>
+            </table>
+        </div>
+        <div th:if="${usuarios ==null or usuarios.empty}">
+            <h2>No hay usuarios que mostrar</h2>
+    </body>
+</html>
